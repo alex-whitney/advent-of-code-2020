@@ -1,4 +1,4 @@
-import {readFileSync} from 'fs';
+import {Day} from '../lib/day';
 
 interface Pair {
     first: number
@@ -9,14 +9,6 @@ interface Triplet {
     first: number
     second: number
     third: number
-}
-
-function getInput(): number[] {
-    let contents = readFileSync(__dirname + "/expense_input.txt");
-    let arr: string[] = contents.toString().split('\n');
-    return arr.map(v => {
-        return parseInt(v, 10);
-    });
 }
 
 function findEntryPair(targetNumber: number, list: number[]): Pair {
@@ -54,22 +46,28 @@ function findEntryTriplet(targetNumber: number, list: number[]): Triplet {
     throw new Error('Did not find a suitable triplet of numbers in the list');
 }
 
-function main() {
-    let list = getInput();
-    
-    console.log('** PART 1 **')
-    let pair = findEntryPair(2020, list);
-    console.log(`First number: ${pair.first}`);
-    console.log(`Second number: ${pair.second}`);
-    console.log(`Product: ${pair.first * pair.second}`);
+export default class DayImpl extends Day {
+    input: number[];
 
-    console.log()
-    console.log('** PART 2 **')
-    let triplet = findEntryTriplet(2020, list);
-    console.log(`First number: ${triplet.first}`);
-    console.log(`Second number: ${triplet.second}`);
-    console.log(`Third number: ${triplet.third}`);
-    console.log(`Product: ${triplet.first * triplet.second * triplet.third}`);
+    constructor() {
+        super(__dirname);
+    }
+
+    initialize() {
+        let input = this.readInput();
+        let arr: string[] = input.toString().split('\n');
+        this.input = arr.map(v => {
+            return parseInt(v, 10);
+        });
+    }
+
+    executePart1(): string {
+        let pair = findEntryPair(2020, this.input);
+        return pair.first * pair.second + "";
+    }
+
+    executePart2(): string {
+        let triplet = findEntryTriplet(2020, this.input);
+        return triplet.first * triplet.second * triplet.third + "";
+    }
 }
-
-main();

@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+
 import {Day} from '../lib/day';
 
 export default class DayImpl extends Day {

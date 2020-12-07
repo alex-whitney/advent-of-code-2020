@@ -1,14 +1,14 @@
 import {readFileSync} from 'fs';
 
 export abstract class Day {
-    directory: string;
+    InputPath: string;
 
     constructor(directory: string) {
-        this.directory = directory;
+        this.InputPath = `${directory}/input.txt`;
     }
 
     readInput(): Buffer {
-        return readFileSync(`${this.directory}/input.txt`);
+        return readFileSync(this.InputPath );
     }
 
     abstract initialize(): void;

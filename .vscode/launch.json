@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "pwa-node",
+            "type": "node",
             "request": "launch",
             "name": "Run over input",
             "skipFiles": [
@@ -16,13 +16,14 @@
             "sourceMaps": true,
             "program": "${workspaceFolder}/run.ts",
             "cwd": "${workspaceRoot}",
+            "outputCapture": "std",
             "resolveSourceMapLocations": [
                 "${workspaceFolder}/**",
                 "!**/node_modules/**"
             ],
         },
         {
-            "type": "pwa-node",
+            "type": "node",
             "request": "launch",
             "name": "Run over selected file",
             "skipFiles": [
@@ -33,10 +34,11 @@
             "sourceMaps": true,
             "program": "${workspaceFolder}/run.ts",
             "cwd": "${workspaceRoot}",
+            "outputCapture": "std",
             "resolveSourceMapLocations": [
                 "${workspaceFolder}/**",
                 "!**/node_modules/**"
-            ],
+            ]
         }
     ]
 }

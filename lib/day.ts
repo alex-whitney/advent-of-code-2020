@@ -7,8 +7,8 @@ export abstract class Day {
         this.InputPath = `${directory}/input.txt`;
     }
 
-    readInput(): Buffer {
-        return readFileSync(this.InputPath );
+    readInput(): string {
+        return readFileSync(this.InputPath).toString();
     }
 
     abstract initialize(): void;

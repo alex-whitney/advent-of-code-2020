@@ -12,11 +12,11 @@ export default class DayImpl extends Day {
         
     }
 
-    executePart1(): string {
+    executePart1(): string|number {
         return "";
     }
 
-    executePart2(): string {
+    executePart2(): string|number {
         return "";
     }
 }

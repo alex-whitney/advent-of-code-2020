@@ -14,19 +14,19 @@ export abstract class Day {
     }
 
     abstract initialize(): void;
-    abstract executePart1(): string;
-    abstract executePart2(): string;
+    abstract executePart1(): string|number;
+    abstract executePart2(): string|number;
 
     run() {
         this.initialize();
 
         this.print('*** PART 1 ***');
         let result = this.executePart1();
-        this.print(`Result: ${result}`);
+        this.print(`Result: ${result+""}`);
 
         this.print('\n*** PART 2 ***');
         result = this.executePart2();
-        this.print(`Result: ${result}`);
+        this.print(`Result: ${result+""}`);
     }
 
     /**

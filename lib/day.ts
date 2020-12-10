@@ -58,4 +58,41 @@ export abstract class Day {
         str = this.sReplAll(str, zeroValue, "0");
         return parseInt(str, 2);
     }
+
+    /**
+     * Computes whether or not a set is a superset of a given set
+     * @param set 
+     * @param subset 
+     * @returns boolean
+     */
+    protected isSuperset(set: Set<any>|any[], subset: Set<any>|any[]): boolean {
+        if (_.isArray(set)) {
+            set = new Set(set);
+        }
+        if (_.isArray(subset)) {
+            subset = new Set(subset);
+        }
+        for (let e of subset) {
+            if (!set.has(e)) return false;
+        }
+        return true;
+    }
+
+    /**
+     * Computes the intersection of two sets
+     * @param setA 
+     * @param setB 
+     */
+    protected intersection<T>(setA: Set<T>|T[], setB: Set<T>|T[]): Set<T> {
+        let _intersection = new Set<T>()
+        if (_.isArray(setA)) {
+            setA = new Set(setA);
+        }
+        for (let elem of setB) {
+            if (setA.has(elem)) {
+                _intersection.add(elem)
+            }
+        }
+        return _intersection;
+    }
 }

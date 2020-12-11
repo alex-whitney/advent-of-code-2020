@@ -24,9 +24,9 @@ export function strReplAll(str: string, target: string, replacement: string): st
  * @param zeroValue The character/string representing 0
  */
 export function strToBinary(str: string, oneValue: string, zeroValue: string): number {
+    if (_.uniq(str).length > 2) throw new Error(`"${str}" does not appear to be a ${oneValue}${zeroValue} string`);
     str = strReplAll(str, oneValue, "1");
     str = strReplAll(str, zeroValue, "0");
-    if (_.uniq(str).length > 2) throw new Error(`"${str}" does not appear to be a ${oneValue}${zeroValue} string`);
     return parseInt(str, 2);
 }
 

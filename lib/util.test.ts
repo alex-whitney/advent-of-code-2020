@@ -24,8 +24,7 @@ describe('util', () => {
             let tc: [string, string, string, string][] = [
                 ["11001100", "1", "0", '11001100'],
                 ["AAAABB", "A", "B", '111100'],
-                ["AABAABB", "B", "A", '0010011'],
-                ["FOOBARBARFOO", "FOO", "BAR", '1001']
+                ["AABAABB", "B", "A", '0010011']
             ];
             for (let testCase of tc) {
                 let result = u.strToBinary(testCase[0], testCase[1], testCase[2]);
@@ -41,9 +40,13 @@ describe('util', () => {
                 ["0xAAAABB", "A", "B"]
             ];
             for (let testCase of tc) {
-                assert.throws(() => {
+                let threw = false;
+                try {
                     u.strToBinary(testCase[0], testCase[1], testCase[2]);
-                }, JSON.stringify(testCase));
+                } catch {
+                    threw = true;
+                }
+                assert(threw, JSON.stringify(testCase));
             }
         });
     });

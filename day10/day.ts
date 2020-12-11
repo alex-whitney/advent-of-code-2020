@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 
+import * as u from '../lib/util';
 import {Day} from '../lib/day';
 
 //
@@ -27,8 +28,8 @@ export default class DayImpl extends Day {
         this.input = new Set(input.split('\n').map(v => {
             return parseInt(v, 10);
         }));
-        this.print(this.input[0]);
-        this.print(this.input[1]);
+        u.print(this.input[0]);
+        u.print(this.input[1]);
     }
 
     find(): number[] {
@@ -58,7 +59,7 @@ export default class DayImpl extends Day {
 
     executePart1(): string|number {
         let result = this.find();
-        this.print(result);
+        u.print(result);
         let distr = {
             1: 1,
             2: 0,
@@ -67,7 +68,7 @@ export default class DayImpl extends Day {
         for (let i = 1; i < result.length; i++) {
             distr[result[i-1] - result[i]] += 1;
         };
-        this.print(distr)
+        u.print(distr)
 
         return distr[1] * distr[3];
     }
@@ -79,7 +80,7 @@ export default class DayImpl extends Day {
         for (let val of arr) {
             counts[val] = (counts[val-1]||0) + (counts[val-2]||0) + (counts[val-3]||0);
         }
-        this.print(counts);
+        u.print(counts);
         return (counts[target-1]||0) + (counts[target-2]||0) + (counts[target-3]||0)
     }
 }

@@ -1,7 +1,9 @@
 import * as _ from 'lodash';
 
+import * as math from 'mathjs';
 import * as u from '../lib/util';
 import {Day} from '../lib/day';
+import { print } from 'mathjs';
 
 // Math! I wrote a naiive solution for p2, which would of course never terminate.
 // The problem seemed super familiar to me. Tried for a bit to math out the approach,
@@ -22,6 +24,7 @@ export default class DayImpl extends Day {
     busses: number[]
     wilds: number
     posBus: number[]
+    indexedBusses: Map<number, number>
     initialize() {
         let input = this.readInput();
         let lines = input.split('\n');
@@ -36,14 +39,10 @@ export default class DayImpl extends Day {
         });
         this.busses = _.filter(this.posBus, v => v!==undefined);
 
-        let busses = {};
+        this.indexedBusses = new Map<number, number>();
         this.posBus.forEach((v, i) => {
-            if (v) busses[i] = v;
+            if (v) this.indexedBusses.set(i, v);
         });
-        u.print(this.earliest)
-        u.print(this.busses.length)
-        u.print(busses);
-        u.print(this.wilds)
     }
 
     executePart1(): string|number {
@@ -62,7 +61,33 @@ export default class DayImpl extends Day {
         return bus * ttw;
     }
 
+    // Wrote later in the day.
     executePart2(): string|number {
-        return "stop";
+        let step = this.indexedBusses.get(0);
+        let t = step;
+
+        this.indexedBusses.forEach((b, idx) => {
+            if (idx === 0) return;
+            
+            while (true) {
+                // on initial loop:
+                //    (bus[0]*c + idx) % b
+                //  will cycle through remainder values. Find the lowest C where the remainder
+                //  is zero. t here represents bus[0]*c - each iteration increments c
+                if ((t + idx) % this.indexedBusses.get(idx) === 0) {
+                    console.log(`Found ${this.indexedBusses.get(idx)} at ${t}`);
+                    // We can now increment by any value that is a multiple of b
+                    // without changing the remainder. So incrementing
+                    // t by (step*b) will ensure we still have (t+idx)%b=0
+                    step = step * this.indexedBusses.get(idx);
+                    break;
+                } else {
+                    t += step;
+                    u.print(t);
+                }
+            }
+        });
+
+        return t;
     }
 }

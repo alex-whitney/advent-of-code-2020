@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import * as math from 'mathjs';
 
 import * as u from '../lib/util';
 import {Day} from '../lib/day';
